@@ -12,8 +12,6 @@ bool containsThreeOfaKind(int hand[]);
 bool containsStraight(int hand[]);
 bool containsFullHouse(int hand[]);
 bool containsFourOfaKind(int hand[]);
-bool containsStraight(int hand[]);
-
 
 // main function
 
@@ -43,19 +41,19 @@ int main() {
 
             if (containsFourOfaKind(card))
             {
-                cout << "Four of a kind!\n" << endl;
+                cout << "Four of a Kind!\n" << endl;
             }
             else if (containsFullHouse(card))
             {
                 cout << "Full House!\n" << endl;
             }
+            else if (containsThreeOfaKind(card))
+            {
+                cout << "Three of a Kind!\n" << endl;
+            }
             else if (containsStraight(card))
             {
                 cout << "Straight!\n" << endl;
-            }
-            else if (containsThreeOfaKind(card))
-            {
-                cout << "Three of a kind!\n" << endl;
             }
             else if (containsTwoPair(card))
             {
@@ -183,19 +181,23 @@ bool containsPair(int hand[])
 
 bool containsStraight(int hand[])
 {
-    int swapHolder;
+    // sorting array from lowest value to highest value
     for (int i = 0; i < 5; i++)
     {
-        for (int j=1; j<(5-1); j++)
+        for (int j=i+1; j<5; j++)
         {
-            if(hand[j-1] > hand[j])
+            if(hand[i] > hand[j])
             {
-                swapHolder = hand[j];
-                hand[j-1] = hand[j];
+                int swapHolder = hand[i];
+                hand[i] = hand[j];
                 hand[j] = swapHolder;
-                return true;
             }
         }
+    }
+    // comparing each element to ensure it increments by one
+    if(hand[0] + 1 == hand[1]  && hand[1] + 1 == hand[2]  && hand[2] + 1 == hand[3]  && hand[3] + 1 == hand[4])
+    {
+        return true;
     }
     return false;
 }
